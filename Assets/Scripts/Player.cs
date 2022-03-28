@@ -14,7 +14,6 @@ public class Player : Character
         _myName = "Player";
         _myHp = 100;
         _myDamage = 20;
-        _playerNumber = 0;
     }
 
     private void Awake()
@@ -33,7 +32,7 @@ public class Player : Character
 
     public override void Attack()
     {
-        if (this._playerNumber.Equals(_whoseTurn) && !_isFinised)
+        if (this._myName.Equals(_whoseTurn) && !_isFinised)
         {
             _attackChoose = Random.Range(0, 10);
             if (_attackChoose < 7)

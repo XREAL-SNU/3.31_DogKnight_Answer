@@ -27,10 +27,10 @@ public class PlayerManager : MonoBehaviour, Subject
     }
 
     private int gameRound = 0;
-    private int whoseTurn = 1;
+    private string whoseTurn = "Enemy";
     private bool isEnd = false;
 
-    private delegate void TurnHandler(int round, int turn);
+    private delegate void TurnHandler(int round, string turn);
     private TurnHandler _turnHandler;
     private delegate void FinishHandler(bool isFinish);
     private FinishHandler _finishHandler;
@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour, Subject
     {
         if (!isEnd)
         {
-            if (whoseTurn == 1)
+            if (whoseTurn == "Enemy")
             {
                 gameRound++;
                 Debug.Log($"PlayerManager: Round {gameRound}.");
@@ -51,8 +51,8 @@ public class PlayerManager : MonoBehaviour, Subject
 
     public void TurnNotify()
     {
-        whoseTurn = (whoseTurn + 1) % 2;
-        Debug.Log($"PlayerManager: player {whoseTurn} turn.");
+        whoseTurn = whoseTurn == "Enemy" ? "Player" : "Enemy";
+        Debug.Log($"PlayerManager: {whoseTurn} turn.");
         _turnHandler(gameRound, whoseTurn);
     }
 

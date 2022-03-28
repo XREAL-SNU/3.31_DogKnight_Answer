@@ -13,7 +13,6 @@ public class Enemy : Character
         _myName = "Enemy";
         _myHp = 100;
         _myDamage = 15;
-        _playerNumber = 1;
     }
 
     private void Awake()
@@ -32,7 +31,7 @@ public class Enemy : Character
     }
     public override void Attack()
     {
-        if (this._playerNumber.Equals(_whoseTurn) && !_isFinised)
+        if (this._myName.Equals(_whoseTurn) && !_isFinised)
         {
             base.Attack();
             AttackMotion();

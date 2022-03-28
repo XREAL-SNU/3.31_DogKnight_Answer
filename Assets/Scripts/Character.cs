@@ -14,13 +14,12 @@ public class Character: MonoBehaviour, Observer
     public string _myName;
     public float _myHp;
     public float _myDamage;
-    public int _playerNumber;
 
     protected int _gameRound;
-    protected int _whoseTurn;
+    protected string _whoseTurn;
     protected bool _isFinised;
 
-    public void ObserverTurnUpdate(int round, int turn)
+    public void ObserverTurnUpdate(int round, string turn)
     {
         _gameRound = round;
         _whoseTurn = turn;
