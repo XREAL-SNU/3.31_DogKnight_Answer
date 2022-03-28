@@ -55,7 +55,7 @@ public class Player : Character
         if (_myHp <= 0)
         {
             DeadMotion();
-            PlayerManager.Instance().EndNotify(_enemy._myName);
+            PlayerManager.Instance().EndNotify();
         }
         else
         {

@@ -56,12 +56,12 @@ public class PlayerManager : MonoBehaviour, Subject
         _turnHandler(gameRound, whoseTurn);
     }
 
-    public void EndNotify(string name)
+    public void EndNotify()
     {
         isEnd = true;
         _finishHandler(isEnd);
         Debug.Log("PlayerManager: The End");
-        Debug.Log($"PlayerManager: Character {name} is Win!");
+        Debug.Log($"PlayerManager: Character {whoseTurn} is Win!");
     }
 
     public void AddCharacter(Character character)

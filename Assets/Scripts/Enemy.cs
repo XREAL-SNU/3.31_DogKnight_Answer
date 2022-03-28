@@ -45,7 +45,7 @@ public class Enemy : Character
         if (_myHp <= 0)
         {
             DeadMotion();
-            PlayerManager.Instance().EndNotify(_player._myName);
+            PlayerManager.Instance().EndNotify();
         }
         else
         {
