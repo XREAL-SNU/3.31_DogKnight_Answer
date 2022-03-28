@@ -27,6 +27,7 @@ public class Enemy : Character
         if (_player == null)
         {
             _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+            Debug.Log($"{_player._myName} In");
         }
     }
     public override void Attack()

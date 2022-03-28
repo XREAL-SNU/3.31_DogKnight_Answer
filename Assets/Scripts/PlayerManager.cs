@@ -26,12 +26,6 @@ public class PlayerManager : MonoBehaviour, Subject
         }
     }
 
-    private void Start()
-    {
-        Invoke("RoundNotify", Time.deltaTime);
-        _finishHandler(isEnd);
-    }
-
     private int gameRound = 0;
     private int whoseTurn = 1;
     private bool isEnd = false;

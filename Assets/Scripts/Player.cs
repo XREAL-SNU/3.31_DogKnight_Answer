@@ -27,7 +27,7 @@ public class Player : Character
         if(_enemy == null)
         {
             _enemy = GameObject.FindWithTag("Enemy").GetComponent<Enemy>();
-            Debug.Log(_enemy._myName);
+            Debug.Log($"{_enemy._myName} In");
         }
     }
 
@@ -36,7 +36,6 @@ public class Player : Character
         if (this._playerNumber.Equals(_whoseTurn) && !_isFinised)
         {
             _attackChoose = Random.Range(0, 10);
-            Debug.Log(_attackChoose);
             if (_attackChoose < 7)
             {
                 AttackMotion();
@@ -45,8 +44,8 @@ public class Player : Character
             else
             {
                 SpecialAttackMotion();
-                _enemy.GetHit(this._myDamage + 10);
                 Debug.Log($"{_myName} Special Attack!");
+                _enemy.GetHit(this._myDamage + 10);
             }
         }
     }
