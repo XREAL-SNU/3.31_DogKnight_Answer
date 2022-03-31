@@ -7,6 +7,7 @@ using XReal.XTown.UI;
 
 public class SceneUI : UIScene
 {
+
     enum Buttons
     {
         AttackButton,

@@ -14,10 +14,12 @@ public class Item : UIBase
     }
 
     private ItemProperty itemProperty;
+    private SceneUI sceneUI;
 
     private void Start()
     {
         Init();
+        sceneUI = GameObject.Find("SceneUI").GetComponent<SceneUI>();
     }
 
     public override void Init()
@@ -25,6 +27,8 @@ public class Item : UIBase
         Bind<GameObject>(typeof(GameObjects));
 
         GetObject((int)GameObjects.ItemImage).BindEvent(OnClick_ItemUse);
+        GetObject((int)GameObjects.ItemImage).BindEvent(Setting);
+        
     }
 
     public void OnClick_ItemUse(PointerEventData data)
@@ -32,9 +36,34 @@ public class Item : UIBase
         if (ItemProperty.GetItemProperty(this.itemProperty.ItemName).ItemNumber >= 1)
         {
             ItemProperty.GetItemProperty(this.itemProperty.ItemName).ItemNumber -= 1;
+            ItemAction();
             Destroy(gameObject);
-            this.transform.parent.parent.GetComponent<ItemGroup>()._settings();
         }
+    }
+
+    public void ItemAction()
+    {
+        switch (itemProperty.PropertyType.ToString())
+        {
+            case "Damage":
+                GameManager.Instance().GetCharacter("Player")._myDamage += itemProperty.ItemAction;
+                Debug.Log($"Player Damge Up : {itemProperty.ItemAction}");
+                break;
+            case "Heal":
+                GameManager.Instance().GetCharacter("Player")._myHp += itemProperty.ItemAction;
+                if (GameManager.Instance().GetCharacter("Player")._myHp > GameManager.Instance().GetCharacter("Player")._myHpMax)
+                {
+                    GameManager.Instance().GetCharacter("Player")._myHp = GameManager.Instance().GetCharacter("Player")._myHpMax;
+                }
+                sceneUI.CharacterHp();
+                Debug.Log($"Player Hp UP : {itemProperty.ItemAction}");
+                break;
+        }
+    }
+
+    public void Setting(PointerEventData data)
+    {
+        this.transform.parent.parent.GetComponent<ItemGroup>()._settings();
     }
 
     public void SetInfo(ItemProperty itemProperty)

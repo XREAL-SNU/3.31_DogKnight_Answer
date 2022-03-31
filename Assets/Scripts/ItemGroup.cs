@@ -20,6 +20,7 @@ public class ItemGroup : UIBase
     }
 
     private string ItemGroupName;
+    private int Number = 0;
 
     GameObject itemPanel;
     GameObject itemTextBackround;
@@ -81,11 +82,12 @@ public class ItemGroup : UIBase
 
     private void _panelSize()
     {
+        CalNum();
         verticalLayout.spacing = 30;
         float Width = this.transform.parent.GetComponent<RectTransform>().sizeDelta.x - verticalLayout.padding.right - verticalLayout.padding.left;
         float d = gridLayout.cellSize.y + gridLayout.spacing.y;
-        float a0 = itemPanel.GetComponent<RectTransform>().sizeDelta.y + gridLayout.padding.bottom;
-        float panelHeight = Mathf.CeilToInt((float)itemPanel.transform.childCount / gridLayout.constraintCount) * d + a0;
+        float a0 = gridLayout.padding.bottom;
+        float panelHeight = Mathf.CeilToInt((float)Number / gridLayout.constraintCount) * d + a0;
         float textHeight = itemTextBackround.GetComponent<RectTransform>().sizeDelta.y;
         itemPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(Width, panelHeight);
         itemPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -textHeight - panelHeight / 2 + verticalLayout.spacing / 2);
@@ -100,5 +102,20 @@ public class ItemGroup : UIBase
     {
         _setGrid();
         _panelSize();
+    }
+
+    public void CalNum()
+    {
+        Number = 0;
+        foreach (ItemProperty itemproperty in ItemProperty.ItemProperties)
+        {
+            if (itemproperty.PropertyType == Enum.Parse(typeof(ItemPropertyType), ItemGroupName).ToString())
+            {
+                for (int i = 0; i < itemproperty.ItemNumber; i++)
+                {
+                    Number++;
+                }
+            }
+        }
     }
 }
