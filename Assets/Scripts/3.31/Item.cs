@@ -27,7 +27,6 @@ public class Item : UIBase
         Bind<GameObject>(typeof(GameObjects));
 
         GetObject((int)GameObjects.ItemImage).BindEvent(OnClick_ItemUse);
-        GetObject((int)GameObjects.ItemImage).BindEvent(Setting);
         
     }
 
@@ -59,11 +58,6 @@ public class Item : UIBase
                 Debug.Log($"Player Hp UP : {itemProperty.ItemAction}");
                 break;
         }
-    }
-
-    public void Setting(PointerEventData data)
-    {
-        this.transform.parent.parent.GetComponent<ItemGroup>()._settings();
     }
 
     public void SetInfo(ItemProperty itemProperty)

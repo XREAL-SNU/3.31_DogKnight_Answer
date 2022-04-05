@@ -41,6 +41,7 @@ public class SceneUI : UIScene
         _player = GameManager.Instance().GetCharacter("Player");
         _enemy = GameManager.Instance().GetCharacter("Enemy");
         GameManager.Instance().AddUI(this);
+        GameManager.Instance().InitNotify();
         GetImage((int)Images.HealImage).gameObject.SetActive(false);
         GetImage((int)Images.GameOverPanel).gameObject.SetActive(false);
     }
@@ -72,7 +73,10 @@ public class SceneUI : UIScene
 
     public void OnClick_InventoryButton(PointerEventData data)
     {
-        UIManager.UI.ShowPopupUI<UIPopup>("Inventory");
+        if (_whoseTurn.Equals("Enemy"))
+        {
+            UIManager.UI.ShowPopupUI<UIPopup>("Inventory");
+        }
     }
 
 
@@ -90,6 +94,7 @@ public class SceneUI : UIScene
     IEnumerator GetDamageCoroutine()
     {
         GetButton((int)Buttons.AttackButton).interactable = false;
+        if (_whoseTurn.Equals("Player")) GetButton((int)Buttons.InventoryButton).interactable = false;
         yield return new WaitForSeconds(1.2f);
         CharacterHp();
         float beforeHp = _enemy._myHp;
@@ -104,6 +109,7 @@ public class SceneUI : UIScene
             GetImage((int)Images.HealImage).gameObject.SetActive(false);
         }
         GetButton((int)Buttons.AttackButton).interactable = true;
+        if (_whoseTurn.Equals("Enemy")) GetButton((int)Buttons.InventoryButton).interactable = true;
         _isClicked = false;
     }
 

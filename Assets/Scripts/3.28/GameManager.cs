@@ -91,6 +91,11 @@ public class GameManager : MonoBehaviour, Subject
         Debug.Log($"GameManager: {_whoseTurn} is Win!");
     }
 
+    public void InitNotify()
+    {
+        _uiHandler(_gameRound, _whoseTurn, _isEnd);
+    }
+
     // 5. AddCharacter: _turnHandler, _finishHandler 각각에 메소드 추가
     public void AddCharacter(Character character)
     {
